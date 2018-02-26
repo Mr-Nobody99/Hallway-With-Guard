@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public float WalkSpeed = 2;
+    public float WalkSpeed = 3f;
     public float runSpeed = 6;
+
+    public float turnSmoothTime = 0.2f;
+    float turnSmoothVelocity;
 
     Animator animator;
 
@@ -22,7 +25,8 @@ public class PlayerController : MonoBehaviour {
 
         if(inputDir != Vector2.zero)
         {
-            transform.eulerAngles = Vector3.up * Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg;
+            float targetRoatation = Mathf.Atan2(inputDir.x, inputDir.y) * Mathf.Rad2Deg;
+            transform.eulerAngles = Vector3.up * Mathf.SmoothDampAngle(transform.localEulerAngles.y, targetRoatation, ref turnSmoothVelocity, turnSmoothTime);
         }
 
         bool running = Input.GetKey(KeyCode.LeftShift);
