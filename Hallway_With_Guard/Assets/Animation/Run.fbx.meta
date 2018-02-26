@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 0760b7ce202689f4fadd186e2d32f250
-timeCreated: 1519636946
+guid: 1ddbf0503bbc140499f1db10300de0be
+timeCreated: 1519640484
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -266,7 +266,7 @@ ModelImporter:
     400256: DollGuy
     400258: //RootNode
     4300000: DollGuy
-    7400000: idle
+    7400000: Run
     9500000: //RootNode
     13700000: DollGuy
   materials:
@@ -293,10 +293,10 @@ ModelImporter:
     extraExposedTransformPaths: []
     clipAnimations:
     - serializedVersion: 16
-      name: idle
+      name: Run
       takeName: Take 001
       firstFrame: 1
-      lastFrame: 40
+      lastFrame: 45
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
