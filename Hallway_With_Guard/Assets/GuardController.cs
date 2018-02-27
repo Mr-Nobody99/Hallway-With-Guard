@@ -7,6 +7,7 @@ public class GuardController : MonoBehaviour {
 
     private Animator animator;
     private float distance;
+    public float agroRange;
 
     [SerializeField]
     Transform _destination;
@@ -15,6 +16,7 @@ public class GuardController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+        agroRange = 10;
         animator = GetComponent<Animator>();
         _navMeshAgent = this.GetComponent<NavMeshAgent>();
 
@@ -26,19 +28,35 @@ public class GuardController : MonoBehaviour {
 
     private void Update()
     {
-            distance = Vector3.Distance(transform.position, _destination.position);
-            print(distance);
-            if(distance > 2.5f)
-            {
-                _navMeshAgent.isStopped = false;
-                animator.SetBool("Walking", true);
-                SetDestination();
-            }
-            else
-            {
-                animator.SetBool("Walking", false);
-                _navMeshAgent.isStopped = true;
-            }
+        distance = Vector3.Distance(transform.position, _destination.position);
+        print(distance);
+
+        if (distance > agroRange)
+        {
+            animator.SetBool("Walking", false);
+            animator.SetBool("CombatStance", false);
+            _navMeshAgent.isStopped = true;
+        }
+        else if (distance < agroRange)
+        {
+            _navMeshAgent.isStopped = false;
+            animator.SetBool("CombatStance", false);
+            animator.SetBool("Walking", true);
+            SetDestination();
+        }
+        if (distance <= 2.5f)
+        {
+            animator.SetBool("Walking", false);
+            animator.SetBool("CombatStance", true);
+            _navMeshAgent.isStopped = true;
+            StartCoroutine("Attack");
+        }
+    }
+
+    private IEnumerable Attack()
+    {
+        print("Attack");
+        yield return new WaitForSeconds(1f);
     }
 
     private void SetDestination()
