@@ -10,6 +10,10 @@ public class PlayerController : MonoBehaviour {
     public float turnSmoothTime = 0.2f;
     float turnSmoothVelocity;
 
+    public float speedSmoothTime = 0.1f;
+    float speedSmoothVelocity;
+    float currentSpeed;
+
     Animator animator;
 
 	// Use this for initialization
@@ -30,9 +34,10 @@ public class PlayerController : MonoBehaviour {
         }
 
         bool running = Input.GetKey(KeyCode.LeftShift);
-        float speed = ((running) ? runSpeed : WalkSpeed) * inputDir.magnitude;
+        float targetspeed = ((running) ? runSpeed : WalkSpeed) * inputDir.magnitude;
+        currentSpeed = Mathf.SmoothDamp(currentSpeed, targetspeed, ref speedSmoothVelocity, speedSmoothTime);
 
-        transform.Translate(transform.forward * speed * Time.deltaTime, Space.World);
+        transform.Translate(transform.forward * currentSpeed * Time.deltaTime, Space.World);
 
         float speedFactor = ((running)?1:.5f)*inputDir.magnitude;
         animator.SetFloat("SpeedFactor",speedFactor);
