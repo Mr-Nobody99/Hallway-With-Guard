@@ -111,8 +111,6 @@ public class Guard_Controller : MonoBehaviour {
         {
             animator.SetBool("Walking", false);
             animator.SetBool("CombatStance", false);
-            //_navMeshAgent.isStopped = true;
-            //_navMeshAgent.SetDestination(AssignNewPost());
         }
         else if (distance < agroRange)
         {
@@ -127,6 +125,7 @@ public class Guard_Controller : MonoBehaviour {
             animator.SetBool("CombatStance", true);
             _navMeshAgent.isStopped = true;
             StartCoroutine(Attack(stop));
+            //StartCoroutine(DoDamage());
         }
     }
 
@@ -137,6 +136,8 @@ public class Guard_Controller : MonoBehaviour {
         {
             stop = !stop;
             animator.SetBool("Attack", true);
+            //_playerPosition.GetComponent<Health>().TakeDamage(1);
+            //print(_playerPosition.GetComponent<Health>().currentHealth);
         }
         else
         {
@@ -152,8 +153,15 @@ public class Guard_Controller : MonoBehaviour {
         else
         {
             animator.SetBool("Attack", false);
+            DoDamage();
             StopCoroutine(Attack(stop));
         }
+    }
+
+    private void DoDamage()
+    {
+        _playerPosition.GetComponent<Health>().TakeDamage(1);
+        print(_playerPosition.GetComponent<Health>().currentHealth);
     }
 
     private void SetDestination()

@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    public int maxHealth = 4;
+    public int currentHealth;
+
     public float WalkSpeed = 3f;
     public float runSpeed = 6;
 
@@ -19,7 +22,8 @@ public class PlayerController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         animator = GetComponent<Animator>();
-	}
+        currentHealth = maxHealth;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -41,5 +45,16 @@ public class PlayerController : MonoBehaviour {
 
         float speedFactor = ((running)?1:.5f)*inputDir.magnitude;
         animator.SetFloat("SpeedFactor",speedFactor);
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Attack();
+        }
 	}
+
+    private void Attack()
+    {
+        animator.SetTrigger("Attack");
+    }
+
 }
