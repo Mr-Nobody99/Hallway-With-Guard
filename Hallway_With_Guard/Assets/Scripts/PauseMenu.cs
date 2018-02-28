@@ -51,7 +51,7 @@ public class PauseMenu : MonoBehaviour {
 	public void RestartGame()
 	{
 		Debug.Log ("Restarting Game");
-		SceneManager.LoadScene ("Scene1");
+		SceneManager.LoadScene ("Alpha1");
 	}
 
 }

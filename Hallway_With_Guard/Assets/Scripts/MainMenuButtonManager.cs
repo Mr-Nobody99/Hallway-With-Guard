@@ -14,9 +14,9 @@ public class MainMenuButtonManager : MonoBehaviour {
 	void Update () {
 		
 	}*/
-	public void PlayGameBtn(string Scene1)
+	public void PlayGameBtn(string Alpha1)
 	{
-		SceneManager.LoadScene (Scene1);
+		SceneManager.LoadScene (Alpha1);
 	}
 
 	public void ExitGameBTN()
