@@ -46,17 +46,21 @@ public class GuardController : MonoBehaviour {
         }
         if (distance <= 2.5f)
         {
+            animator.ResetTrigger("Attack");
             animator.SetBool("Walking", false);
             animator.SetBool("CombatStance", true);
             _navMeshAgent.isStopped = true;
-            StartCoroutine("Attack");
+            StartCoroutine(Attack());
         }
     }
 
-    private IEnumerable Attack()
+    private IEnumerator Attack()
     {
         print("Attack");
+        //animator.ResetTrigger("Attack");
+        animator.SetTrigger("Attack");
         yield return new WaitForSeconds(1f);
+        //StartCoroutine(Attack());
     }
 
     private void SetDestination()
