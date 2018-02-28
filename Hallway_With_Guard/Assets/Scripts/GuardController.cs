@@ -37,10 +37,10 @@ public class GuardController : MonoBehaviour {
 
     private void Update()
     {
-        if (transform.position.Equals(_currentPost))
-            atCurrentPost = true;
-        else
-            atCurrentPost = false;
+        //if (transform.position.Equals(_currentPost))
+        //    atCurrentPost = true;
+        //else
+        //    atCurrentPost = false;
 
         distance = Vector3.Distance(transform.position, _playerPosition.position);
         print(distance);
